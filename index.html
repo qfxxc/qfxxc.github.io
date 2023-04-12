@@ -255,21 +255,17 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p> <strong>目录</strong></p>
-<p>[前言： 接着文章：单向链表和动态链表_清风笑纤尘的博客-CSDN博客继续写，学习怎么进行链表的查找、删除、插入操作](#前言： 接着文章：单向链表和动态链表_清风笑纤尘的博客-CSDN博客继续写，学习怎么进行链表的查找、删除、插入操作)</p>
-<p><a href="#%E4%B8%80.%E9%93%BE%E8%A1%A8%E7%9A%84%E6%9F%A5%E6%89%BE">一.链表的查找</a></p>
-<p><a href="#%E4%BA%8C.%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%A0%E9%99%A4">二.链表的删除</a></p>
-<p><a href="#%E4%B8%89.%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5">三.链表的插入</a></p>
-<p><a href="#%E7%BB%93%E8%AF%AD%EF%BC%9A">结语</a></p>
-<hr>
-<h2 id="前言：-接着文章：单向链表和动态链表-清风笑纤尘的博客-CSDN博客继续写，学习怎么进行链表的查找、删除、插入操作"><a href="#前言：-接着文章：单向链表和动态链表-清风笑纤尘的博客-CSDN博客继续写，学习怎么进行链表的查找、删除、插入操作" class="headerlink" title="前言： 接着文章：单向链表和动态链表_清风笑纤尘的博客-CSDN博客继续写，学习怎么进行链表的查找、删除、插入操作"></a>前言： 接着文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_72873217/article/details/128141400?spm=1001.2014.3001.5501">单向链表和动态链表_清风笑纤尘的博客-CSDN博客</a>继续写，学习怎么进行链表的查找、删除、插入操作</h2><h2 id="一-链表的查找"><a href="#一-链表的查找" class="headerlink" title="一.链表的查找"></a>一.链表的查找</h2><p>由于链表是由指针建立的表示数据元素前后关系的数据结构，因此不能采用随机查找方式。</p>
+    <hr>
+<h2 id="一-链表的查找"><a href="#一-链表的查找" class="headerlink" title="一.链表的查找"></a>一.链表的查找</h2><p>由于链表是由指针建立的表示数据元素前后关系的数据结构，因此不能采用随机查找方式。</p>
 <p>我们先看下面的代码，再分析：</p>
 <p>由于于之前写的代码相关，故在之前代码基础上新添加以下代码，该代码是个自定义函数，作用就是找链表的位置。如图：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(Pnode head, <span class="type">int</span> number)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">	Pnode p = head-&gt;next;</span><br><span class="line">	<span class="keyword">while</span> (p-&gt;data != number &amp;&amp; p-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		cnt++;<span class="comment">//按顺序找，找一个就加1</span></span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;<span class="comment">//判断是否为对应元素是否为空，如果为空或者为对应元素，则停止循环</span></span><br><span class="line">	<span class="keyword">if</span> (p-&gt;data!=number)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;查找的元素%d不在链表中。\n&quot;</span>, number);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;<span class="comment">//如果该元素为对应元素为空，则不在链表中</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;查找的元素%d在链表中第%d个位置。\n&quot;</span>, number, cnt);<span class="comment">//如果找到对应元素，则查找成功。</span></span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>进行以下分析，我们已经知道动态链表的创立是怎样的。所以，为了查找到相应的数据，我们可以遍历循环找出，而在动态链表中，我们知道head指针指向第一个结点，但真正的数据存在第二个结点中，所以，代码第二行直接令一个指针等于指向head的下一个结点（也就是第一个结点），这是之前的图：</p>
-<p>之前我们假设赋予了1，2这两个值，<img src="D:\hexo\source\images\1.png" alt="1">此时head指向的为1，但并不代表赋予的值，后面的1，2才是我们真的赋予的值，所以head指向的数据并无实际意义，所以应该令p等于x2，即指向第二个结点。</p>
+<p>之前我们假设赋予了1，2这两个值，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/qfxxc/hexo@main/1.png"></p>
+<p>此时head指向的为1，但并不代表赋予的值，后面的1，2才是我们真的赋予的值，所以head指向的数据并无实际意义，所以应该令p等于x2，即指向第二个结点。</p>
 <p>之后就是注释里面说的了，这就是查找函数。</p>
 <h2 id="二-链表的删除"><a href="#二-链表的删除" class="headerlink" title="二.链表的删除"></a>二.链表的删除</h2><p>同查找的函数一样，我们直接上代码分析：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">delnode</span><span class="params">(Pnode head, <span class="type">int</span> number)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Pnode q = head, p = head-&gt;next;</span><br><span class="line">	<span class="keyword">while</span> (p-&gt;data != number &amp;&amp; p-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		q = p;</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;<span class="comment">//遍历查找，q用来指向查找到的结点的前一个结点,如果循环结束，要么是查找到该数据了，要么就是查到最后一个数据了</span></span><br><span class="line">	<span class="keyword">if</span> (p-&gt;data != number)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;查找到的元素%d不在链表中。\n&quot;</span>, number);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;<span class="comment">//再次判断，如果该数据不满足条件，则未查到该数据</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		q-&gt;next = p-&gt;next;</span><br><span class="line">		<span class="built_in">free</span>(p);<span class="comment">//释放该空间，即删除.</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;删除元素%d成功\n&quot;</span>, number);</span><br><span class="line">	&#125;<span class="comment">//查找到该数据了，为了删除成功，就需要将删除的结点的前一个结点和删除的结点的后一个结点建立关系，所以有q-&gt;next=p-&gt;next.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -285,10 +281,10 @@
 <p>对定义插入元素的部分进行分析：</p>
 <p>设一开始的状态是这样的。</p>
 <p>之后，申请一个空间，并且赋值（此时还没有建立联系）,设为s1,赋的值为2</p>
-<p><img src="D:\hexo\source\images\2.png" alt="2"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/qfxxc/hexo@main/2.png"></p>
 <p>然后s-&gt;next&#x3D;p-&gt;next,</p>
 <p>p-&gt;next&#x3D;s 后，则：</p>
-<p><img src="D:\hexo\source\images\3.png" alt="3"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/qfxxc/hexo@main/3.png"></p>
 <p>这就很容易理解了，这就是插入</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这就是链表的查找、删除、和插入，希望能够对你有所帮助，并且，我们也能很容易发现，链表利用画图来理解可以起到事半功倍的效果。</p>
 
@@ -307,7 +303,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Typora</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
         		</li>
       		
 		</ul>
@@ -574,7 +570,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
             
             <div class="clearfix"></div>
