@@ -264,7 +264,12 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-markdown快速掌握/markdown快速掌握" class="article article-type-post " itemscope itemprop="blogPost">
+            {% if toc.enable %}
+  <div class="toc">
+    {{ toc(content) }}
+  </div>
+{% endif %}
+<article id="post-markdown快速掌握/markdown快速掌握" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -609,6 +614,7 @@
         
     </div>
 </aside>
+
 
 
 

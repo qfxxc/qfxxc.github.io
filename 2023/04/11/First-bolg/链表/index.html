@@ -239,7 +239,12 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-First-bolg/链表" class="article article-type-post " itemscope itemprop="blogPost">
+            {% if toc.enable %}
+  <div class="toc">
+    {{ toc(content) }}
+  </div>
+{% endif %}
+<article id="post-First-bolg/链表" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -504,6 +509,7 @@
         
     </div>
 </aside>
+
 
 
 
